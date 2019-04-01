@@ -29,42 +29,30 @@ class FotoInfo extends Component {
     return (
       <div className="foto-info">
         <div className="foto-info-likes">
-          <a href="/">alots_ssa</a>,<a href="/">rafael_rollo</a>
+        {this.props.foto.likers.map(liker => {
+          return <a href="/" key={liker.id}>{liker.login}, </a>
+        })}
           curtiram
         </div>
 
         <p className="foto-info-legenda">
           <a href="/" className="foto-info-autor">
-            autor{" "}
+            {this.props.foto.comentario}
           </a>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, illo?
         </p>
 
         <ul className="foto-info-comentarios">
-          <li className="comentario">
+        {this.props.foto.comentarios.map(comentario => {
+          return(
+
+          <li className="comentario" key={comentario.id}>
             <a href="/" className="foto-info-autor">
-              seguidor{" "}
+              {comentario.login}
             </a>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem ad,
-            molestiae.
+            {comentario.texto}
           </li>
-          <li className="comentario">
-            <a href="/" className="foto-info-autor">
-              seguidor{" "}
-            </a>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-            cumque earum molestias voluptatem modi nihil sit magnam ratione
-            eveniet distinctio magni error asperiores dignissimos tempora
-            expedita, laborum ex soluta hic maiores veritatis deserunt.
-          </li>
-          <li className="comentario">
-            <a href="/" className="foto-info-autor">
-              seguidor{" "}
-            </a>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum
-            laudantium quae ab fuga odio delectus maiores voluptatibus sit
-            commodi quidem.
-          </li>
+          );
+        })}
         </ul>
       </div>
     );
@@ -77,14 +65,14 @@ class FotoHeader extends Component {
       <header className="foto-header">
         <figure className="foto-usuario">
           <img
-            src="https://www.instagram.com/p/BvcW9yNhxFy.jpg"
-            alt="foto do usuario"
+            src={this.props.foto.urlPerfil}
+            alt="foto perfil do usuario"
           />
           <figcaption className="foto-usuario">
-            <a href="/">alots</a>
+            <a href="/">{this.props.foto.loginUsuario}</a>
           </figcaption>
         </figure>
-        <time className="foto-data">03/10/2016 20:13</time>
+        <time className="foto-data">{this.props.foto.horario}</time>
       </header>
     );
   }
@@ -94,13 +82,13 @@ export default class Foto extends Component {
   render() {
     return (
       <div className="foto">
-        <FotoHeader />
+        <FotoHeader foto={this.props.foto}/>
         <img
           alt="foto"
           className="foto-src"
-          src="https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-15/e35/14482111_1635089460122802_8984023070045896704_n.jpg?ig_cache_key=MTM1MzEzNjM4NzAxMjIwODUyMw%3D%3D.2"
+          src={this.props.foto.urlFoto}
         />
-        <FotoInfo />
+        <FotoInfo foto={this.props.foto}/>
         <FotoAtualizacoes />
       </div>
     );
