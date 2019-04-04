@@ -33,7 +33,6 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        {console.log(this.enviaForm)}
         <form className="login-box" onSubmit={this.enviaForm}>
           <h1 className="header-logo">Instalura</h1>
           <span>{this.state.msg}</span>
