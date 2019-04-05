@@ -21,7 +21,7 @@ router.post('/login', (req, res) => {
       admin: true,
     }
 
-    let generationToken = jwt.sign(tokenData, config.JWT_KEY, {expiresIn: '4m'});
+    let generationToken = jwt.sign(tokenData, config.JWT_KEY, {expiresIn: '1m'});
     res.json({
       tudoCerto: true,
       token: generationToken
