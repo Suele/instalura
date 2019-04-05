@@ -18,20 +18,18 @@ export default class Login extends Component {
         email: this.email.value,
         senha: this.senha.value
       }),
-      headers: new Headers({
-        "Content-type": "application/json"
-      })
+      headers: {
+        "Content-Type": "application/json"
+      }
     };
-    console.log(userDate);
-    fetch("http://localhost:3001/auth/login", userDate)
-      .then(response => {
-        response.ok
-          ? response.text()
-          : this.setState({
-              msg: "Dados incorretos verifique seu email e senha."
-            });
-      })
-      .then(tokenUsuario => console.log("token: ", tokenUsuario));
+    
+    fetch("http://localhost:3001", userDate)
+      .then(response => response.json())
+      .then(responsejson => {
+        if (responsejson) {
+          localStorage.setItem("key_token_login", responsejson.token);
+        }
+      });
   };
 
   render() {
@@ -42,7 +40,7 @@ export default class Login extends Component {
           <span>{this.state.msg}</span>
           <input
             name="email"
-            type="text"
+            type="email"
             placeholder="Email"
             ref={inputEmail => (this.email = inputEmail)}
           />
