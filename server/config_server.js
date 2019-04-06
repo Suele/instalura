@@ -1,5 +1,4 @@
 const express = require('express');
-const debug = require('debug')('nodestr:server');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const config = require('./config/index');
