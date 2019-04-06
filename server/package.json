@@ -11,12 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "debug": "^4.1.1",
     "express": "^4.16.4",
-    "http": "0.0.0",
     "jsonwebtoken": "^8.5.1"
-  },
-  "devDependencies": {
-    "eslint": "^5.16.0"
   }
 }
