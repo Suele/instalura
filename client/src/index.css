@@ -161,9 +161,6 @@ optgroup {
 }
 
 button,
-input {}
-
-button,
 select {
   text-transform: none
 }

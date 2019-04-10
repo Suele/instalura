@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from 'react';
 
-class FotoAtualizacoes extends Component {
+class FotoAtualizacoes extends React.Component {
   render() {
     return (
       <section className="fotoAtualizacoes">
@@ -24,13 +24,13 @@ class FotoAtualizacoes extends Component {
   }
 }
 
-class FotoInfo extends Component {
+class FotoInfo extends React.Component {
   render() {
     return (
       <div className="foto-info">
         <div className="foto-info-likes">
         {this.props.foto.likers.map(liker => {
-          return <a href="/" key={liker.id}>{liker.login}, </a>
+          return <a href="/" key={liker.id}>{liker.login}, </a>;
         })}
           curtiram
         </div>
@@ -59,7 +59,7 @@ class FotoInfo extends Component {
   }
 }
 
-class FotoHeader extends Component {
+class FotoHeader extends React.Component {
   render() {
     return (
       <header className="foto-header">
@@ -78,7 +78,7 @@ class FotoHeader extends Component {
   }
 }
 
-export default class Foto extends Component {
+export default class Foto extends React.Component {
   render() {
     return (
       <div className="foto">

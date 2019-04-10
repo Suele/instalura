@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Foto from "./Foto";
+import React from 'react';
+import Foto from './Foto';
 
-export default class Timeline extends Component {
+export default class Timeline extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ export default class Timeline extends Component {
   }
 
   componentDidMount() {
-    fetch("https://instalura-api.herokuapp.com/api/public/fotos/rafael")
+    fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
       .then(res => res.json())
       .then(fotos => {
         this.setState({ novasFotos: fotos });
