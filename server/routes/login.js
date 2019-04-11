@@ -1,31 +1,37 @@
 const express = require('express');
-const router = express.Router();
 const jwt = require('jsonwebtoken');
-const config = require('../config/index.js');
+const config = require('../config/index');
+const router = express.Router();
 
-// rota para enviar dados para o servidor.
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
+
   const {
     email,
     senha
-  } = req.body.userDate;
+  } = req.body;
+
+  console.log(email, senha);
 
   if ((email === undefined || senha === undefined) || (email === '' || senha === '')) {
     res.status(401).json({
-      msg: 'email e/ou senha são invalidos.'
+      msg: 'email e/ou senha são inválidos.'
     });
   } else {
     const tokenData = {
-      email:'fulano@email.com',
+      email: 'fulano@email.com',
       senha: '123456',
       admin: true,
-    }
+    };
 
-    let generationToken = jwt.sign(tokenData, config.JWT_KEY, {expiresIn: '1m'});
+    let generationToken = jwt.sign({
+      tokenData
+    }, config.JWT_KEY, {
+        expiresIn: '1m'
+      });
     res.json({
       tudoCerto: true,
       token: generationToken
-    })
+    });
   }
 });
 
