@@ -86,7 +86,7 @@ export default class Login extends React.Component {
       .then(responsejson => {
         if (responsejson && !this.state.redirectToReferrer) {
           localStorage.setItem("key_token_login", responsejson.token);
-          if (auth) {
+          if (auth && !this.state.redirectToReferrer) {
             console.log("ola estou dentro.");
             return this.setState({ redirectToReferrer: true });
           }
