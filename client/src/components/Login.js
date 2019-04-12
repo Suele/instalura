@@ -16,12 +16,6 @@ export default class Login extends React.Component {
     };
   }
 
-  login = () => {
-    auth.verifyAuth(() => {
-      this.setState({ redirectToReferrer: true });
-    });
-  };
-
   emailForm = e => {
     this.setState({ email: e.target.value });
   };
@@ -70,7 +64,6 @@ export default class Login extends React.Component {
     } else if (this.state.senha && this.state.email) {
       this.setState({ erroEmail: "", erroSenha: "" });
       this.enviaForm(e);
-      this.login();
     }
   };
 
@@ -91,8 +84,12 @@ export default class Login extends React.Component {
     fetch("http://localhost:3001/", userDate)
       .then(response => response.json())
       .then(responsejson => {
-        if (responsejson) {
+        if (responsejson && !this.state.redirectToReferrer) {
           localStorage.setItem("key_token_login", responsejson.token);
+          if (auth) {
+            console.log("ola estou dentro.");
+            return this.setState({ redirectToReferrer: true });
+          }
         }
       });
     console.log(this.state);

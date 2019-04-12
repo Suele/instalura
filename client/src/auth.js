@@ -1,10 +1,7 @@
- const isAuthenticated = {
-  
-  userAuth : false,
-  verifyAuth(){
-    this.userAuth = (localStorage.getItem('key_token_login'));
-  }
-  
- };
+
+const isAuthenticated = () => {
+
+  return (localStorage.getItem('key_token_login')) ? true : false;
+};
 
 export default isAuthenticated;
