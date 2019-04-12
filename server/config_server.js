@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routerLogin = require('./routes/login');
+const routerLogin = require('./routes/login.js');
+const routerTimeline = require('./routes/timeline.js');
 const app = express();
 
 app.use(bodyParser.json());
@@ -14,7 +15,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+//rotas
 app.use('/', routerLogin);
+app.use('/timeline', routerTimeline);
 
 
 app.listen(3001, () => {
