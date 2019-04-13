@@ -1,5 +1,5 @@
-import React from 'react';
-import Foto from './Foto';
+import React from "react";
+import Foto from "./Foto";
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class Timeline extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+    fetch("https://instalura-api.herokuapp.com/api/public/fotos/rafael")
       .then(res => res.json())
       .then(fotos => {
         this.setState({ novasFotos: fotos });
@@ -20,7 +20,7 @@ export default class Timeline extends React.Component {
 
   render() {
     return (
-      <div className="fotos container">
+      <div className='fotos container'>
         {this.state.novasFotos.map(novaFoto => (
           <Foto key={novaFoto.id} foto={novaFoto} />
         ))}
