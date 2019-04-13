@@ -1,19 +1,25 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import auth from "../auth";
 import "../css/login.css";
+import auth from '../auth';
+import { Redirect } from "react-router-dom";
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      msg: "",
+      msgGeral: "",
       email: "",
       senha: "",
       erroEmail: "",
       erroSenha: "",
       redirectToReferrer: false
     };
+  }
+
+  verificaToken = () => {
+    if (auth) {
+      this.setState({ redirectToReferrer: true });
+    }
   }
 
   emailForm = e => {
@@ -24,45 +30,18 @@ export default class Login extends React.Component {
     this.setState({ senha: e.target.value });
   };
 
-  validacao = e => {
+  verificaCampos = e => {
     e.preventDefault();
     if (!this.state.email && !this.state.senha) {
-      return this.setState({
-        erroEmail: "o campo e-mail está vaziu.",
-        erroSenha: "o campo senha está vaziu."
-      });
-    } else if (!this.state.email && this.state.senha >= 6) {
-      return this.setState({
-        erroEmail: "o campo e-mail está vaziu.",
-        erroSenha: ""
-      });
-    } else if (!this.state.senha) {
-      return this.setState({ erroSenha: "o campo senha está vaziu." });
-    } else if (
-      this.state.senha.length > 0 &&
-      this.state.senha.length < 6 &&
-      !this.state.email
-    ) {
-      return this.setState({
-        erroEmail: "o campo e-mail está vaziu.",
-        erroSenha: "o campo senha contém 6 caracteres ou mais."
-      });
-    } else if (
-      this.state.senha.length > 0 &&
-      this.state.senha.length < 6 &&
-      this.state.email
-    ) {
-      return this.setState({
-        erroEmail: "",
-        erroSenha: "o campo senha contém 6 caracteres ou mais."
-      });
-    } else if (this.state.senha.length >= 6 && !this.state.email) {
-      return this.setState({
-        erroEmail: "o campo e-mail está vaziu.",
-        erroSenha: ""
-      });
+      return this.setState({ msgGeral: "Os campos e-mail e senha são obrigatórios." });
+    } else if (this.state.email && this.state.senha.length > 0 && this.state.senha.length <= 6) {
+      return this.setState({ msgGeral: "Por favor verifique seu e-mail e senha." });
+    } else if (this.state.email && !this.state.senha) {
+      return this.setState({ msgGeral: "O campo senha é obrigatótio." })
+    } else if (!this.state.email && this.state.senha) {
+      return this.setState({ msgGeral: "O campo e-mail é obrigatótio." })
     } else if (this.state.senha && this.state.email) {
-      this.setState({ erroEmail: "", erroSenha: "" });
+      this.setState({ msgGeral: "" });
       this.enviaForm(e);
     }
   };
@@ -84,11 +63,10 @@ export default class Login extends React.Component {
     fetch("http://localhost:3001/", userDate)
       .then(response => response.json())
       .then(responsejson => {
-        if (responsejson && !this.state.redirectToReferrer) {
+        if (responsejson) {
           localStorage.setItem("key_token_login", responsejson.token);
-          if (auth && !this.state.redirectToReferrer) {
-            console.log("ola estou dentro.");
-            return this.setState({ redirectToReferrer: true });
+          if (!this.state.redirectToReferrer) {
+            this.verificaToken();
           }
         }
       });
@@ -96,6 +74,7 @@ export default class Login extends React.Component {
   };
 
   render() {
+
     let { from } = this.props.location.state || { from: { pathname: "/" } };
     let { redirectToReferrer } = this.state;
 
@@ -103,24 +82,22 @@ export default class Login extends React.Component {
 
     return (
       <div>
-        <form className='login-box' onSubmit={this.validacao}>
-          <h1 className='header-logo'>Instalura</h1>
-          <span>{this.state.msg}</span>
+        <form className="login-box" onSubmit={this.verificaCampos}>
+          <h1 className="header-logo">Instalura</h1>
+          <span className="alert-danger">{this.state.msgGeral}</span>
           <input
-            name='email'
-            type='email'
-            placeholder='Email'
+            name="email"
+            type="email"
+            placeholder="Email"
             onChange={this.emailForm}
           />
-          <span>{this.state.erroEmail}</span>
           <input
-            name='senha'
-            type='password'
-            placeholder='Senha'
+            name="senha"
+            type="password"
+            placeholder="Senha"
             onChange={this.senhaForm}
           />
-          <span>{this.state.erroSenha}</span>
-          <input type='submit' value='ok' />
+          <button className="btn btn-primary" type="submit">OK</button>
         </form>
       </div>
     );

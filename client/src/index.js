@@ -3,24 +3,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./css/timeline.css";
+import "bootstrap/dist/css/bootstrap.css";
 import Login from "./components/Login";
 import Timeline from "./components/Timeline";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import * as serviceWorker from "./serviceWorker";
-import isAuthenticated from "./auth";
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      )
-    }
-  />
-);
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -31,5 +18,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
-
-serviceWorker.unregister();
