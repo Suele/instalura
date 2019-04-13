@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
     let generationToken = jwt.sign({
       tokenData
     }, config.JWT_KEY, {
-        expiresIn: '1m'
+        expiresIn: '4m'
       });
     res.json({
       tudoCerto: true,
