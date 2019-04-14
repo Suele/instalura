@@ -1,5 +1,6 @@
 import React from "react";
 import Foto from "./Foto";
+import "../css/timeline.css";
 
 export default class Timeline extends React.Component {
   constructor(props) {
