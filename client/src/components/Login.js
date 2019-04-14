@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/login.css";
 import auth from '../auth';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 export default class Login extends React.Component {
   constructor() {
@@ -98,6 +98,7 @@ export default class Login extends React.Component {
             onChange={this.senhaForm}
           />
           <button className="btn btn-primary" type="submit">OK</button>
+          <Link to="/register" className="link-register">Faça o seu cadastro</Link>
         </form>
       </div>
     );

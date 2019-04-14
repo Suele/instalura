@@ -1,0 +1,46 @@
+.form-register {
+  margin: auto;
+  padding: 5px;
+  background: #e76f51;
+  display: block;
+  width: 500px;
+  max-width: 700px;
+  height: 570px;
+  max-height: 700px;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 9px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+label {
+  font-weight: bold;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.form-button {
+  margin: 20px;
+}
+
+.form-link {
+  margin-top: 20px;
+}
+
+.form-style-link {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}

@@ -18,6 +18,12 @@
 
 span {
   margin: auto;
-  padding: auto;
+  padding: 30px 30px auto;
   border-radius: 3px;
+  background: #dbdbdb;
+}
+
+.link-register {
+  color: white;
+  margin: 10px 20px auto;
 }
