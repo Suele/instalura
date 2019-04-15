@@ -1,0 +1,21 @@
+nav {
+  background-color: #faa300;
+}
+
+a:link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:hover {
+  color: #36494e;
+}
+
+.nav-link {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.nav-input {
+  font-weight: bold;
+}
